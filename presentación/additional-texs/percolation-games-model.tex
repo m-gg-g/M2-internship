@@ -1,0 +1,355 @@
+\begin{frame}{Percolation Games: zero-sum stochastic games on $\Z^d$}
+  
+  % \begin{center}
+  %   \textcolor{blendedblue}{\Large $(I, J, \mathcal{E}, g, q)$}
+  % \end{center}
+
+  \pause 
+  Are described by a tuple $(I, J, \mathcal{E}, g, q)$, where
+  \vspace{0.5cm}
+
+  \begin{itemize}
+    \item[-] $I$ and $J$ are finite sets representing respectively player 1’s and player 2’s action sets.
+    \item[-] $\mathcal{E} = (\Omega, \mathcal{F}, \Pbb)$ is a probability space. 
+    % equipped with a collection of measurable transformation $\{\tau_z\}_{z \in \mathbb{Z}^d}$ which are measure preserving, form a group under composition and are ergodic. 
+    \item[-] $g := \{\omega \mapsto g_{\omega}(z,i,j)\}_{(z,i,j) \in \Z^d \times I \times J}$ is the payoff function.
+    \item[-] $q \colon I \times J \to \Z^d$ is a transition function. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Percolation Games: $(I, J, \mathcal{E}, g, q)$}
+  Let $\omega \in \Omega$ and a token placed at $z_1 \in \Z^d$.
+  \vspace{0.2cm}
+  \pause
+
+  Players are informed of $\omega$ and at each stage $m \in \N_+$:
+  \begin{itemize}
+    \item[-] player 1 chooses an action $i_m$ 
+    \item[-] then, knowing $i_m$, player 2 chooses an action $j_m$
+    \item[-] player 1 receives $g_m^{\omega} := g_{\omega}(z_{m}, i_m, j_m)$, and player 2 $-g_m^{\omega}$
+    \item[-] the token moves to:  
+      \[
+        z_{m+1} = z_m + q(i_m, j_m).
+      \]
+    \item[-] $(i_m, j_m, z_{m+1})$ is publicly announced.
+  \end{itemize}
+\end{frame}	 
+
+\begin{frame}{Limit value for percolation games}
+  For the $n$-stage game:
+  \begin{eqnarray*}
+    \gamma_n^{\omega}(z, \sigma, \tau) & = & \frac{1}{n}\sum_{m=1}^ng_m^{\omega} \\
+     v_n^{\omega}(z) & = & \max_{\sigma \in \Sigma}\min_{\tau \in T} \gamma_n^{\omega}(z, \sigma, \tau) = \min_{\tau \in T}\max_{\sigma \in \Sigma} \gamma_n^{\omega}(z, \sigma, \tau).
+  \end{eqnarray*}
+  \vspace{0.2cm}
+  \pause
+
+  The central question: Does $v_n(z)$ converge as $n$ approaches infinity?
+  \pause
+
+  \begin{knownresult}
+    For i.i.d. and oriented games the value's sequence converge a.s. to a constant!
+  \end{knownresult}
+\end{frame}
+
+\begin{frame}{$(I, J, \mathcal{E}, g, \textcolor{red}{q})$}
+  Let $\omega \in \Omega$ and a token placed at $z_1 \in \Z^d$.
+  \vspace{0.2cm}
+
+  Players are informed of $\omega$ and at each stage $m \in \N_+$:
+  \begin{itemize}
+    \item[-] player 1 chooses an action $i_m$ 
+    \item[-] then, knowing $i_m$, player 2 chooses an action $j_m$
+    \item[-] player 1 receives $g_m^{\omega} := g_{\omega}(z_{m}, i_m, j_m)$, and player 2 $-g_m^{\omega}$
+    \item[-] the token moves to:  
+      \[
+        z_{m+1} = z_m + \textcolor{red}{q}(i_m, j_m).
+      \]
+    \item[-] $(i_m, j_m, z_{m+1})$ is publicly announced.
+  \end{itemize}
+  
+    \begin{definition}[oriented]
+      \color{red} If $\exists u \in \Z^d \colon \mathcal{F}orall (i, j) \in I \times J, q(i, j) \cdot u > 0$.
+    \end{definition}
+\end{frame} 
+
+\begin{frame}{$(I, J, \mathcal{E}, \textcolor{red}{g}, q)$}
+  Let $\omega \in \Omega$ and a token placed at $z_1 \in \Z^d$.
+  \vspace{0.2cm}
+
+  Players are informed of $\omega$ and at each stage $m \in \N_+$:
+  \begin{itemize}
+    \item[-] player 1 chooses an action $i_m$ 
+    \item[-] then, knowing $i_m$, player 2 chooses an action $j_m$
+    \item[-] player 1 receives $g_m^{\omega} := \textcolor{red}{g}_{\omega}(z_{m}, i_m, j_m)$, and player 2 $-g_m^{\omega}$
+    \item[-] the token moves to:  
+      \[
+        z_{m+1} = z_m + q(i_m, j_m).
+      \]
+    \item[-] $(i_m, j_m, z_{m+1})$ is publicly announced.
+  \end{itemize}
+  
+  % Change the color of the word "Definition" for the next definition
+
+  \begin{definition}[i.i.d.]
+   \color{red} If the random variables $\{\omega \mapsto g_{\omega}(z, i, j)\}_{(z, i, j) \in \Z^d \times I \times J}$ are i.i.d.
+  \end{definition}  
+\end{frame} 
+
+% \begin{frame}
+%   \begin{theorem}\label{theorem_iid_and_oriented_percolation_games}
+%     For an i.i.d. and oriented percolation game, and all $z \in \Z^d$, $v_n(z) \xrightarrow[n \to \infty]{} v_{\infty}$, with $v_{\infty} \in \R$. 
+
+%     Moreover, $\exists A, B \in \R_{+} \colon$ $\mathcal{F}orall n \geq 1$, $z \in \Z^d$ and $\lambda \geq 0$,
+%     \[
+%       \Pbb\left(|v_n(z) - v_{\infty}| \geq \lambda + A\ln(n + 1)^{1/2}n^{-1/2} \right) \leq \exp(-B\lambda^2n)
+%     \]
+%     In particular, $\E(v_n)$ converges to $v_{\infty}$ as $O(ln(n)n^{-1/2})$.
+%   \end{theorem}
+% \end{frame}
+
+\begin{frame}{Generalizing the model}
+  From $\Gamma$ to $\textcolor{blendedblue}{\Gamma_{\xi} := (I, J, \mathcal{E}, g, q + \textcolor{red}{ \xi})}$ (or $\Gamma_{\mu}$ where $\xi_m \thicksim \mu$ is known)
+  \vspace{0.5cm}
+
+  Let $\omega \in \Omega$ and a token placed at $z_1 \in \Z^d$.
+  \vspace{0.2cm}
+
+  Players are informed of $\omega$ and at each stage $m \in \N_+$:
+  \begin{itemize}
+    \item[-] player 1 chooses an action $i_m$ 
+    \item[-] then, knowing $i_m$, player 2 chooses an action $j_m$
+    \item[-] player 1 receives $g_m^{\omega} := g_{\omega}(z_{m}, i_m, j_m)$, and player 2 $-g_m^{\omega}$
+    \item[-] the token moves to:  
+      \[
+        z_{m+1} = z_m + q(i_m, j_m) + \textcolor{red}{\xi_m}.
+      \]
+    \item[-] $(i_m, j_m, z_{m+1})$ is publicly announced.
+  \end{itemize}
+  \vspace{0.2cm}
+
+  \textcolor{red}{where $\xi = \{\xi_m\}_{m \geq 1}$ are i.i.d. r.v's defined on $\mathcal{E}$.} 
+\end{frame}
+
+\begin{frame}{Main result for $\Gamma_{\mu}$}
+  \begin{itemize}
+    \item[-] $\Gamma_{\mu}$ is i.i.d. as long as $\Gamma$ is i.i.d.
+    \item[-] If $\mu$ has zero expectation, $\Gamma_{\mu}$ is oriented in expectation as long as $\Gamma$ is oriented.
+  \end{itemize}
+
+  \begin{theorem} \label{theorem-main}
+    Consider a percolation game $\Gamma_{\mu}$ i.i.d. with $\Gamma$ oriented and $\mu$ a probability distribution with zero expectation and bounded support. For all $z \in \Z^d$, $v_n(z) \xrightarrow[n \to \infty]{} v_{\infty}$, with $v_{\infty} \in \R$. 
+
+    Moreover, $\exists A, B \in \R_{+} \colon$ $\mathcal{F}orall n \geq 1$, $z \in \Z^d$ and $\lambda \geq 0$,
+    \[
+      \Pbb\left(|v_n(z) - v_{\infty}| \geq \lambda + A\ln(n + 1)^{1/2}n^{-1/2S} \right) \leq \exp(-B\lambda^2n).
+    \]
+    In particular, $\E(v_n)$ converges to $v_{\infty}$ at a rate $O(\ln(n)n^{-1/2})$.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}{Proof steps:}
+  \begin{enumerate}
+    \item \textcolor<2->{red}{$v_n(z)$ concentrates around its expectation $\E(v_n)$.}
+    \item $\E(v_n) \xrightarrow[n \to \infty]{} v_{\infty}$.
+    \item $\E(v_n)$ converge fast to $v_{\infty}$.
+    \item Therefore, $v_n$ concentrates on $v_{\infty}$.
+  \end{enumerate}
+
+  \vspace{1.0cm}
+  \visible<2->{It must be proven that $\Pbb(|v_n(z) - \E(v_n)| \geq \lambda)$ decreases with $n$.\\ 
+  To achieve this, we rely on Azuma–Hoeffding's inequality.}
+\end{frame}
+
+\begin{frame}{Preliminary definitions and observations}
+  \begin{itemize}
+    \item For $n \geq 1$, define 
+    \[
+      \mathcal{C} := [-n\cdot\|q+\xi\|_{\infty}..n\cdot\|q+\xi\|_{\infty}]^d
+    \]
+    \item Define 
+    \[
+      H := \{z \in \Z^d \mid z \cdot u = 0\}
+    \]
+    \item There exists a constant $C$, such that 
+    $$ 
+      \mathcal{C} \subset \bigcup_{r = 1}^{Cn}H_r, \text{ where } H_r = \{z \in \Z^d \mid z \cdot u = h_r\}
+    $$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof: Concentration on $\E(v_n)$}
+  For $r \in [0..Cn]$:
+  \vspace{0.2cm}
+
+  \begin{itemize}
+    \item Define the $\sigma$-algebra:
+    \[
+      \mathcal{F}_r := \sigma((\omega \to g_{\omega}(z, i, j)): (z, i, j) \in \cup_{r' = 1}^{r}H_{r'}\times I \times J).
+    \]
+    \item Define the martingale:
+      $$
+        W_r := \E(v_n(0)|\mathcal{F}_r).
+      $$
+    \item Prove the inequality:
+    \begin{equation*}
+      \textcolor<2->{red}{|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}}
+    \end{equation*}
+  \end{itemize}
+\end{frame}
+\begin{frame}{Proof: Concentration on $\E(v_n)$}
+  To prove: $|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}$
+  \vspace{0.5cm}
+
+  
+  \vspace{0.2cm}
+  \begin{itemize}
+    \item For $r \in [0..Cn]$, define the auxiliary game $\Gamma_{\mu}' = (I, J, \mathcal{E}, g', q)$:
+    \[
+      g'_{\omega}(z, i, j) = \begin{cases}
+                                0          &   z \in H_{r+1},\\
+                                g_{\omega}(z, i, j) & \text{otherwise} .
+                              \end{cases}
+    \]
+    \item Note that, for all $(\sigma, \tau) \in \Sigma \times T$,
+    \[
+      |\gamma_n^{'\omega}(0, \sigma, \tau) - \gamma_n^{\omega}(0, \sigma, \tau)| \leq \frac{(1+M_n)\|g\|_{\infty}}{n},
+    \]
+    where $M_n := \#\{\text{of returns to } H_{r+1} \text{ by stage } n\}$.
+    \item Prove $\E_{z_1, \sigma, \tau}(M_n) = O(1)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof: Concentration on $\E(v_n)$}
+  To prove: $|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}$
+  \vspace{0.5cm}
+
+  
+  \vspace{0.2cm}
+  \begin{itemize}
+    \item For $r \in [0..Cn]$, define the auxiliary game $\Gamma_{\mu}' = (I, J, \mathcal{E}, g', q)$:
+    \[
+      g'_{\omega}(z, i, j) = \begin{cases}
+                                0          &   z \in H_{r+1},\\
+                                g_{\omega}(z, i, j) & \text{otherwise} .
+                              \end{cases}
+    \]
+    \item Note that, for all $(\sigma, \tau) \in \Sigma \times T$,
+    \[
+      |\gamma_n^{'\omega}(0, \sigma, \tau) - \gamma_n^{\omega}(0, \sigma, \tau)| \leq \frac{\|g\|_{\infty}}{n},
+    \]
+    where $M_n := \#\{\text{of returns to } H_{r+1} \text{ by stage } n\}$.
+    \item Prove $\E_{z_1, \sigma, \tau}(M_n) = O(1)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof: Concentration on $\E(v_n)$}
+  To prove: $|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}$
+  \vspace{0.5cm}
+
+  
+  \vspace{0.2cm}
+  \begin{itemize}
+    \item For $r \in [0..Cn]$, define the auxiliary game $\Gamma_{\mu}' = (I, J, \mathcal{E}, g', q)$:
+    \[
+      g'_{\omega}(z, i, j) = \begin{cases}
+                                0          &   z \in H_{r+1},\\
+                                g_{\omega}(z, i, j) & \text{otherwise} .
+                              \end{cases}
+    \]
+    \item Note that, for all $(\sigma, \tau) \in \Sigma \times T$,
+    \[
+      |\gamma_n^{'\omega}(0, \sigma, \tau) - \gamma_n^{\omega}(0, \sigma, \tau)| \leq \frac{(1+M_n)\|g\|_{\infty}}{n},
+    \]
+    where $M_n := \#\{\text{of returns to } H_{r+1} \text{ by stage } n\}$.
+    \item \textcolor<2->{red}{Prove $\E_{z_1, \sigma, \tau}(M_n) = O(1)$.}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+    Let $z_1 \in \mathcal{C}$, $(\sigma, \tau) \in \Sigma \times T$, and $n \in \N_+$, we have
+    \begin{equation*}\label{EMn}
+      \E_{z_1, \sigma, \tau}(M_n) \leq \frac{\exp(-L)}{1 - \exp(-L)}.
+    \end{equation*}
+
+    \begin{proof}
+      \begin{enumerate}
+        \item The total displacement magnitude of the token in the direction $u$ from $H_{r+1}$ is $
+          d_k = \sum_{m=s}^k \|\vectproj[u]{q(i_m, j_m)}\|.$
+        \item $\Pbb_{z_1, \sigma, \tau}(\text{returns after distance} \; d_k) \leq \Pbb\left(\sum_{m=s}^k \xi_m > d_k\right).$
+        \item By Hoeffding's inequality: $\Pbb\left(\sum_{m=s}^k \xi_m > d_k\right) \leq \exp\left(-Lk\right).$
+        \item And $\E_{z_1, \sigma, \tau}(M_n) = \sum_{k = 1}^{n} \Pbb\left(\sum_{m=s}^k \xi_m > d_k\right)$.
+        \item Therefore, $\E_{z_1, \sigma, \tau}(M_n)$ is bounded by a geometric series with ratio $\exp(-L)$. 
+      \end{enumerate}
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Proof: concentration on $\E(v_n)$}
+  To prove: $|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}$
+  \vspace{0.5cm}
+
+  \begin{itemize}
+    \item Define the auxiliary game $\Gamma_{\mu}' = (I, J, \mathcal{E}, g', q)$, with
+    \[
+      g'_{\omega}(z, i, j) = \begin{cases}
+                                0          &   z \in H_{r+1},\\
+                                g_{\omega}(z, i, j) & \text{otherwise} .
+                              \end{cases}
+    \]
+    \item Note the inequality:
+    \[
+      |\gamma_n^{'\omega}(0, \sigma, \tau) - \gamma_n^{\omega}(0, \sigma, \tau)| \leq \frac{(1+M_n)\|g\|_{\infty}}{n}. 
+    \]
+    where $M_n := \#\{\text{of returns to } H_{r+1} \text{ by stage } n\}$.
+    \item \textcolor{red}{Prove $\E(M_n) = O(1)$.} \textcolor{green}{\checkmark}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof: concentration on $\E(v_n)$}
+  For $r \in [0..Cn]$:
+  \vspace{0.2cm}
+
+  \begin{itemize}
+    \item Define the $\sigma$-algebra:
+    \[
+      \mathcal{F}_r := \sigma((\omega \to g_{\omega}(z, i, j)): (z, i, j) \in \cup_{r' = 1}^{r}H_{r'}\times I \times J).
+    \]
+    \item Define the martingale:
+      $$
+        W_r := \E(v_n(0)|\mathcal{F}_r).
+      $$
+    \item Prove the inequality:
+    \begin{equation*}
+      \textcolor{red}{|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}} \; \textcolor{green}{\checkmark}
+    \end{equation*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof: concentration on $\E(v_n)$ \textcolor{green}{\checkmark}}
+  For $r \in [0..Cn]$:
+  \vspace{0.2cm}
+
+  \begin{itemize}
+    \item Define the $\sigma$-algebra:
+    \[
+      \mathcal{F}_r := \sigma((\omega \to g_{\omega}(z, i, j)): (z, i, j) \in \cup_{r' = 1}^{r}H_{r'}\times I \times J).
+    \]
+    \item Define the martingale:
+      $$
+        W_r := \E(v_n(0)|\mathcal{F}_r).
+      $$
+    \item Prove the inequality:
+    \begin{equation*}
+      \textcolor{red}{|\E (v_n(0)|\mathcal{F}_{r+1}) - \E (v_n(0)|\mathcal{F}_r)| \leq \frac{D\|g\|_{\infty}}{n} \quad \mathbb{P}\text{-a.s.}}
+    \end{equation*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof steps:}
+  \begin{enumerate}
+    \item \textcolor{red}{$v_n(z)$ concentrates around its expectation $\E(v_n)$.} \textcolor{green}{\checkmark}
+    \item $\E(v_n) \xrightarrow[n \to \infty]{} v_{\infty}$.
+    \item $\E(v_n)$ converge fast to $v_{\infty}$.
+    \item Therefore, $v_n$ concentrates on $v_{\infty}$.
+  \end{enumerate}
+\end{frame}

@@ -1,0 +1,82 @@
+% % Set the theme
+% \usetheme{Boadilla}
+% % Remove navigation symbols
+% \setbeamertemplate{footline}{}
+% % Change the color of the text
+% \setbeamercolor{structure}{fg=Blue} 
+
+\setbeamertemplate{itemize item}[circle]            % First level item
+\setbeamertemplate{itemize subitem}{\raisebox{0.05em}{\scalebox{0.5}{$\blacktriangleright$}}}  
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{float} % floating environments
+\usepackage{stmaryrd, amsfonts, amssymb, amsmath} % math
+\usepackage{graphicx, subfigure, caption}
+\usepackage{color,tcolorbox} % colored texts
+\usepackage[dvipsnames]{xcolor} % para el color Blue
+\usepackage{setspace} % for adjusting line spacing
+\usepackage{sgame}
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage{ragged2e} % for using justify
+\usepackage{multicol}
+\usepackage{vwcol}  
+\usepackage{wrapfig}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs, graphs.standard, quotes, shapes.geometric}
+\usepackage{ifthen}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+\tikzset{
+    cross/.pic = {
+    \draw[rotate = 45] (-#1,0) -- (#1,0);
+    \draw[rotate = 45] (0,-#1) -- (0, #1);
+    }
+}
+
+\newcommand{\costOne}{
+    \begin{tikzpicture}[baseline, yshift=0.5ex, scale=0.5pt] 
+        \draw[ultra thin, color = blue] (0, 0) -- (1, 0);
+    \end{tikzpicture}
+}
+
+\newcommand{\costZero}{
+    \begin{tikzpicture}[baseline, yshift=0.5ex, scale=0.5pt]
+        \draw[dashed, ultra thin, color = blue] (0, 0) -- (1, 0);
+    \end{tikzpicture}
+}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+% command for the projection of a vector 1 onto a vector 2
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathit}
+\newcommand{\vectproj}[2][]{\proj_{\vct{#1}}[\vct{#2}]}
+
+% \setbeamertemplate{theorems}[numbered] % to number
+% \newtheorem{proofidea}[theorem]{Proof sketch.}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{knownresult}[theorem]{Known result}
+% \newtheorem{conjecture}[theorem]{Conjecture}
+
+% redefining some math commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Pbb}{\mathbb{P}}
+\newcommand{\F}{\mathscr{F}}
+\makeatletter
+\newcommand{\fixed@sra}{$\vrule height 2\fontdimen22\textfont2 width 0pt\shortrightarrow$}
+\newcommand{\shortarrow}[1]{%
+  \mathrel{\text{\rotatebox[origin=c]{\numexpr#1*45}{\fixed@sra}}}
+}
+\makeatother
+\definecolor{blendedblue}{rgb}{0.2, 0.2, 0.7}
+\renewcommand{\tablename}{Example of a zero-sum matrix game}

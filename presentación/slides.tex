@@ -1,0 +1,555 @@
+\documentclass[11pt, mathserif]{beamer}
+\input{preamble}
+
+\title{% 
+      Percolation games: percolation structures in non-oriented games on \texorpdfstring{$\mathbb{Z}^2$}{Z2} and random transitions in oriented games}
+\date{}
+  
+\begin{document}
+    \begin{frame}
+        \maketitle
+    \end{frame}
+
+    \justify % Use justify package to enable text alignment to both margins
+    \begin{frame}
+        \begin{center}
+            \textcolor{blendedblue}{Percolation games: percolation structures in non-oriented games on \texorpdfstring{$\mathbb{Z}^2$}{Z2} and random transitions in oriented games}
+        \end{center}
+        \vspace{0.5cm}
+
+        \begin{enumerate}
+            \item Explores two examples of percolation games on $\Z^2$:
+                \begin{itemize}
+                    \item Characterize lattice structures that provide strategic advantages to the players.
+                    \item Analyze the critical probabilities of their occurrence. 
+                    \item Examine their strategic implications. 
+                    \item Use computational simulations for further insights. 
+                \end{itemize}
+            \item Extends the model:
+                \begin{itemize}
+                    \item Incorporate a stochastic process into the transitions.
+                    \item Prove similar results as known for percolation games. 
+                \end{itemize}
+        \end{enumerate}
+    \end{frame}
+
+    \begin{frame}{Example of a zero-sum stochastic game on $\mathbb{Z}^2$}    
+        \begin{itemize}
+            \item[--] The state space is $\mathbb{Z}^2$.
+            \item[--] For $p \in [0, 1]$: 
+                \begin{itemize}
+                    \item Random costs on the edges $\{c(e)\}_{e \in \mathbb{E}^2}$, with $c(e) \sim \text{Bernoulli}(p)$ i.i.d.
+                    \item We consider $(\Omega = \{0, 1\}^{\mathbb{E}^2}, \mathcal{F}, \mathbb{P}_p)$.
+                \end{itemize}
+        \end{itemize}
+        \begin{figure}[!hbt]
+          \centering
+          \includegraphics[width = 0.3\textwidth]{./images/game2/L5grid_arrowsit0p040.png}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}  
+        \begin{figure}[!hbt]
+          \centering
+          \includegraphics[width = 0.3\textwidth]{./images/game2/L5grid_arrowsit0p040.png}
+        \end{figure}
+
+        Let $p$ be fixed, $\omega \in \Omega$ and a token is placed at $z \in \mathbb{Z}^2$.\\
+        The players are informed of $\omega$ and the game proceed as follows:
+        \vspace{0.2cm}
+
+        At each stage $m \in \mathbb{N}_+$: 
+        \begin{itemize}
+            \item[--] Player 1 moves the token up or down.
+            \item[--] Then, player 2 moves it left or right.
+            \item[--] Player 1 receives the costs of the corresponding traversed edges, and player 2 receives the opposite amount.
+        \end{itemize}
+    \end{frame}
+
+
+    \begin{frame}
+        For the $n$-stage game, the total payoff and value are:
+        \begin{eqnarray*}
+          \gamma_n(z, \sigma, \tau) & = & \frac{1}{2n}\sum_{m = 1}^{2n}c(e_m), \\
+                            v_n(z)  & = & \max_{\sigma \in \Sigma}\min_{\tau \in T} \gamma_n(z, \sigma, \tau) = \min_{\tau \in T}\max_{\sigma \in \Sigma} \gamma_n(z, \sigma, \tau).
+        \end{eqnarray*}
+        \pause
+
+        For the $\infty$-stage game,
+        \begin{eqnarray*}      
+          \gamma(z, \sigma, \tau) & = & \limsup_{n \to \infty}\frac{1}{2n}\sum_{m = 1}^{2n}c(e_m), \\
+                           v_p(z) & = & \max_{\sigma \in \Sigma}\min_{\tau \in T} \gamma(z, \sigma, \tau) = \max_{\tau \in T}\min_{\sigma \in \Sigma} \gamma(z, \sigma, \tau).
+        \end{eqnarray*}
+    \end{frame} 
+
+  %  \begin{frame}{Does $v_p(z)$ depends on $z$? Is $v_p$ random?}
+  %   \begin{theorem}\label{theorem-vz-independent-z-game1}
+  %       $v_p(z)$ is independent of $z$. 
+  %   \end{theorem}
+  %   \begin{theorem}\label{theorem-vz-independent-z-game1}
+  %       $v_p$ is almost surely deterministic. 
+  %   \end{theorem}
+  % \end{frame}
+
+  % \begin{frame}
+  %   \begin{theorem}\label{theorem-vz-independent-z-game1}
+  %       $v_p(z)$ is independent of $z$. 
+  %   \end{theorem}
+  %   \begin{proof}[Proof ideas]
+  %       \begin{enumerate}
+  %           \item Consider $z, z' \in \mathbb{Z}^2$, with $z'$ to the right of $z$. 
+  %           \item The value function decreases when player 1 consistently plays up or down from $z$ and player 2 plays optimally.
+  %           \item Similarly, the value function increases when player 2 consistently plays left from $z'$ and player 1 plays optimally. 
+  %           \item The paths induced by these strategies either cross or stay in a similar direction. In both cases, $v_p(z') \leq v_p(z)$.
+  %           \item By symmetry, $v_p(z) = v_p(z')$ for all $z, z' \in \Z^2$.\\
+  %           \qedhere
+  %       \end{enumerate}
+  %   \end{proof}
+  % \end{frame}
+
+  % \begin{frame}
+  %   \begin{theorem}\label{theorem-vz-independent-z-game1}
+  %       $v_p$ is almost surely deterministic. 
+  %   \end{theorem}
+
+  %   \begin{proof}[Proof sketch]
+  %     \begin{enumerate}
+  %       \item Consider the event $\{v_p > x\}$, for some $x \in \R$. 
+  %       \item Is translation invariant by the previous theorem.
+  %       \item Since $\Pbb_p$ is ergodic, $\Pbb_p(v_p > x) \in \{0, 1\}$, for all $x \in \R$.
+  %       \item Thus, there exists $c \in \R$ such that $v_p = c$ a.s. \\
+  %       \qedhere
+  %     \end{enumerate}
+  %   \end{proof}
+  % \end{frame}
+
+    \begin{frame}{Does $v_p(z)$ depends on $z$? Is $v_p$ random?}
+        \begin{theorem}\label{theorem-vz-independent-z-game1}
+            $v_p(z)$ is independent of $z$. 
+        \end{theorem}
+        \begin{theorem}\label{theorem-vz-independent-z-game1}
+            $v_p$ is almost surely deterministic. 
+        \end{theorem}
+        \vspace{0.5cm}
+        \pause
+
+        A natural question is: What is its value? \\ 
+        \pause
+        \vspace{0.2cm}
+        What should we focus on to answer this question? \\ \pause 
+
+        On lattice structures that gives strategic advantages to the players!
+    \end{frame}
+
+    \begin{frame}{Player 1 can keep player 2 inside this one!}
+        \vspace{0.3cm}
+        \input{./additional-texs/game2-player1-structure-point} 
+    \end{frame}
+
+    \begin{frame}{Player 1 can keep player 2 inside this one!}      
+        \vspace{0.3cm}
+
+        Further imagine, is filled with 1s
+        \input{./additional-texs/game2-player1-structure-blue} 
+        \pause
+
+        \vspace{0.3cm}
+         ...it guarantees a value of 1!\\
+        \vspace{0.3cm}
+        \pause
+         Therefore, if such a structure filled with 1s exists, since the player 1 can reach it in a finite number of steps, the value of the game is 1.
+    \end{frame}
+
+
+    \begin{frame}{Defining winning structures for player 1}  
+        \begin{definition}\label{def-right-structure-game2}
+            A infinite subgraph $C = (V, E)$ of the lattice $\Z^2$ is said to be a \emph{winning structure} for player 1 if, for all $z \in V$, there exists an $i \in I$ such that, for all $j \in J$, the vertices $z + (0, i)$ and $z + (j, i)$ are in $V$,  and the edges $\{z, z + (0, i)\}$, and $\{z + (0, i), z + (j, i)\}$ are in $E$. 
+        \end{definition}
+
+        \vspace{0.5cm}
+        As the game is symmetric, until the end of the game analysis, we will focus solely on Player 1.
+    \end{frame}
+
+    \begin{frame}
+        \begin{proposition}[Geometric characterization of ws for player 1]\label{rigtht-structure-player1-game2}
+            A structure $C$ is a winning one for player 1 if and only if, from any of it vertices, at least one of the following local configurations is present: 
+            \begin{center}
+                \begin{tikzpicture}[baseline, yshift=0.5ex, scale=0.5pt] 
+                    \draw[color=black!100] (0, 0) circle (2pt);
+                    \draw[color = black!100] (0, 0) -- (0, -1);
+                    \draw[color = black!100] (0, -1) -- (1, -1);
+                    \draw[color = black!100] (0, -1) -- (-1, -1);
+
+                    \draw[color=black!100] (2, -1) circle (2pt);
+                    \draw[color = black!100] (2, 0) -- (2, -1);
+                    \draw[color = black!100] (2, 0) -- (3, 0);
+                    \draw[color = black!100] (2, 0) -- (1, 0);
+                \end{tikzpicture}
+            \end{center}
+        \end{proposition} 
+
+        \vspace{0.5cm}
+        \textcolor{blendedblue}{41-horizontal}: a winning structure for player 1 filled with 1s, \textcolor{blendedblue}{$H_{41}$} the event of its existence, and it critical probability:
+        \[
+          \textcolor{blendedblue}{q_1} = \inf\{p \in [0, 1] \colon \Pbb_p(H_{41}) = 1\}
+        \]
+    \end{frame}
+
+    \begin{frame}
+        \begin{theorem}\label{conjecture-v0-p0}
+            For all $p > q_1$, $v_p = 1$.
+        \end{theorem}
+
+        % \pause
+        % \begin{proof}[Proof sketch]
+        %   \begin{enumerate}
+        %     \item If $p > q_1$, a $41$-horizontal structure appears. 
+        %     \item This structure is a winning one for player 1.
+        %     \item Therefore, $v_p =  1$ for $p > q_1$. \\
+
+        %     \qedhere
+        %   \end{enumerate}
+        % \end{proof}
+
+        \pause
+        \begin{theorem}\label{theorem-q0}
+            $0 < q_1 < 1$.
+        \end{theorem}
+    \end{frame}
+
+    \begin{frame}{\large \textcolor{blendedblue}{$0 < q_1 < 1$, is equivalent to $q_1 < 1$}}
+        Note that, $$q_1 < 1 \text{ and } q_0 < q_1 = 1 - q_0  \implies q_0 < 1 \implies q_1 > 0.$$
+
+        \pause
+        \vspace{0.3cm}
+        \textcolor{blendedblue}{Idea for proving $q_1 < 1$:} We focus on a subset of 41-horizontal structures, for which it is easier to establish the bound.
+    \end{frame}
+
+    \begin{frame}{$41^*$-horizontal structures}
+        \vspace{0.5cm}
+        \input{./additional-texs/structures-juntas} 
+
+        \vspace{0.5cm}
+        \begin{definition}\label{definition_structures_restricted_game2}
+            $41^*$-horizontal structures are 41-horizontal structures that when viewed from left to right, each square:
+            \begin{itemize}
+                \item[--] only have neighbors to its right, above or bellow,
+                \item[--] if it is above or below, the next one must be to the right.
+            \end{itemize}
+        \end{definition}
+
+        \vspace{0.5cm}
+        Similarly, \textcolor{blendedblue}{$H_{41}^*$} and \textcolor{blendedblue}{$q_1^*$} are defined.
+    \end{frame}
+
+    \begin{frame}
+        {\large \textcolor{blendedblue}{$q_1 < 1$, is equivalent to $q_1^* < 1$}}
+        
+        Follows from $H_{41}^* \subset H_{41} \implies q_1 \leq q_1^*$
+
+        \vspace{0.7cm}
+        \pause
+
+        \textcolor{blendedblue}{General idea for proving $q_1^* < 1$:} to bound $\Pbb_p(H_{41}^{*c})$ using a Peierls-type argument and that a path of squares translates into a path of 1-dependent sites. The latter is done by associating each square to it center and making the center open if and only the square has all it edges with cost equal to 1.
+    \end{frame}
+
+  % \begin{frame}
+  %     \begin{eqnarray*} 
+  %        \Pbb_p(H_{41}^{*c}) & \leq & \sum_{n \geq 1} \sum_{\substack{\tilde{a} \in [-n,n]\times\{n\},\\ \tilde{b} \in [-n,n]\times\{-n\}}} \kappa(\tilde{a}, \tilde{b}) \Pbb_p\left(\substack{\text{a given dual path} \text{ from } \tilde{a} \\  \text{ to } \tilde{b} \text{ is not $41^*$-vertical}}\right) \\
+  %                   &  \leq & \sum_{n \geq 1} (2n)^2 \sum_{l \geq 2n} \textcolor<3>{red}{\rho(l)} \Pbb_p\left(\substack{\text{a given dual path of length} \\ \text{$l$ is not $41^*$-vertical}}\right),
+  %     \end{eqnarray*} 
+  %   \pause 
+  %   \[
+  %     \leq 4\sum_{n \geq 1} n^2\sum_{l \geq 2n}  \textcolor<3>{red}{2^{l + 2}} (1 - p^4)^{l/5} \quad \visible<3>{\textcolor{red}{\left(\substack{\text{bound of an explicit} \\ \text{formula for } \rho(l)}\right)}}
+  %   \]
+  % \end{frame}
+
+  % \begin{frame}
+  %     \begin{eqnarray*} 
+  %        \Pbb_p(H_{41}^{*c}) & \leq & \sum_{n \geq 1} \sum_{\substack{\tilde{a} \in [-n,n]\times\{n\},\\ \tilde{b} \in [-n,n]\times\{-n\}}} \kappa(\tilde{a}, \tilde{b}) \Pbb_p\left(\substack{\text{a given dual path} \text{ from } \tilde{a} \\  \text{ to } \tilde{b} \text{ is not $41^*$-vertical}}\right) \\
+  %                   &  \leq & \sum_{n \geq 1} (2n)^2 \sum_{l \geq 2n} \textcolor{red}{\rho(l)} \textcolor{blue}{\Pbb_p\left(\substack{\text{a given dual path of length} \\ \text{$l$ is not $41^*$-vertical}}\right)},
+  %     \end{eqnarray*} 
+    
+  %   \[
+  %     \leq 4\sum_{n \geq 1} n^2\sum_{l \geq 2n}  \textcolor{red}{2^{l + 2}} \textcolor{blue}{(1 - p^4)^{l/5}} \quad \textcolor{blue}{\left(\substack{\text{path of squares translate into} \\ \text{a path of 1-dependent sites}}\right)}
+  %   \]
+  % \end{frame}
+
+  % \begin{frame}
+  %     \begin{eqnarray*} 
+  %        \Pbb_p(H_{41}^{*c}) & \leq & \sum_{n \geq 1} \sum_{\substack{\tilde{a} \in [-n,n]\times\{n\},\\ \tilde{b} \in [-n,n]\times\{-n\}}} \kappa(\tilde{a}, \tilde{b}) \Pbb_p\left(\substack{\text{a given dual path} \text{ from } \\ \tilde{a} \text{ to } \tilde{b} \text{ is not $41^*$-vertical}}\right) \\
+  %                   &  \leq & \sum_{n \geq 1} (2n)^2 \sum_{l \geq 2n} \rho(l) \Pbb_p\left(\substack{\text{a given dual path of length} \\ \text{$l$ is not $41^*$-vertical}}\right),
+  %     \end{eqnarray*} 
+  %   \[
+  %     \leq 4\sum_{n \geq 1} n^2\sum_{l \geq 2n} 2^{l + 2} (1 - p^4)^{l/5} \visible<1->{\to 0, \text{ as } (1/2)^{1/4} < p \to 1.}
+  %   \]
+   
+  %  \vspace{0.5cm}
+  %  \visible<2->{
+  %     Therefore, $\Pbb_p(H_{41}^*) > 0$ for $p > (1/2)^{1/4}$ sufficiently large.}
+  %  \vspace{0.2cm}
+
+  %  \visible<3->{
+  %     $H_{41}^* \text{ translation invariant} \implies q _1^* \leq (1/2)^{1/4} < 1$.}
+  % \end{frame}
+
+
+    \begin{frame}
+        \begin{theorem}\label{conjecture-v0-p0}
+            For all $p > q_1$, with $0 < q_1 < 1$, $v_p = 1$.
+        \end{theorem}
+        \vspace{0.5cm}
+
+         \begin{conjecture}\label{conjecture-v0-q0}
+           $v_p = 1$ if and only if $p \geq q_1$.
+         \end{conjecture}
+
+         \vspace{0.5cm}
+         \begin{itemize}
+            \item[--] Supercritical: We have it from the previous theorem.
+            \item[--] Critical: It is necessary to study the critical behavior of percolation through these structures...
+            \item[--] Subcritical: Consider a suboptimal strategy for player 2 that guarantees a path with a positive density of 0s.
+         \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Key computational findings}
+        \pause
+        Based on what we have discussed so far, we know that:\\
+        \vspace{0.1cm}
+
+        There exist $0 < q_0 < q_1 < 1$ such that
+        \[
+            v_p  =  \begin{cases}
+                        0 & \text{if } p < q_0, \\
+                        1 & \text{if } p > q_1.
+                    \end{cases}
+        \]
+
+        \vspace{0.5cm}
+        \pause
+        \textcolor{blendedblue}{Simulations revealed that this game has more than two phase transitions, where the distribution of 0 and 1 costs across the winning structures emerged as a significant factor!}
+    \end{frame}
+
+    \begin{frame}{Simulating the game}
+        \textcolor{blendedblue}{Goal}: Estimate $\E(v_{n, p})$.
+        \vspace{0.3cm}
+
+        Approach: 
+        \begin{itemize}
+            \item[--] We fixed a $\mathcal{L} := [-N..N] \times [-N..N]$ and a sequence of 200 equally spaced $p$ values within the interval $(0, 1)$. 
+            \item[--] For each $p$, we ran 30 simulations.
+            \item[--] For each realization, we computed $v_N(0)$ recursively.  
+        \end{itemize}
+
+        \input{./additional-texs/representacion-recursividad}
+    \end{frame}
+
+    \begin{frame}
+        \textcolor{blendedblue}{Goal}: Estimate $\E(v_{n, p})$.
+        \vspace{0.3cm}
+
+        Approach: 
+        \begin{itemize}
+            \item[--] We fixed a $\mathcal{L} := [-N..N] \times [-N..N]$ and a sequence of 200 equally spaced $p$ values within the interval $(0, 1)$. 
+            \item[--] For each $p$, we ran 30 simulations.
+            \item[--] For each realization, we computed $v_N(0)$ recursively.  
+        \end{itemize}
+
+        \input{./additional-texs/representacion-k2}
+    \end{frame}
+
+
+    \begin{frame}
+        \textcolor{blendedblue}{Goal}: Estimate $\E(v_{n, p})$.
+        \vspace{0.3cm}
+
+        Approach: 
+        \begin{itemize}
+            \item[--] We fixed a $\mathcal{L} := [-N..N] \times [-N..N]$ and a sequence of 200 equally spaced $p$ values within the interval $(0, 1)$. 
+            \item[--] For each $p$, we ran 30 simulations.
+            \item[--] For each realization, we computed $v_N(0)$ recursively.  
+        \end{itemize}
+
+        \input{./additional-texs/representacion-k24}
+    \end{frame}
+
+    % \begin{frame}
+    %     \textcolor{blendedblue}{Goal}: Estimate $\E(v_{n, p})$.
+    %     \vspace{0.3cm}
+
+    %     Approach: 
+    %     \begin{itemize}
+    %         \item[--] We fixed a $\mathcal{L} := [-N..N] \times [-N..N]$ and a sequence of 200 equally spaced $p$ values within the interval $(0, 1)$. 
+    %         \item[--] For each $p$, we ran 30 simulations.
+    %         \item[--] For each realization, we computed $v_N(0)$ recursively.  
+    %     \end{itemize}
+
+    %     \input{./additional-texs/representacion-k1}
+    % \end{frame}
+
+    % \begin{frame}
+    %     \textcolor{blendedblue}{Goal}: Estimate $\E(v_{n, p})$.
+    %     \vspace{0.3cm}
+
+    %     Approach: 
+    %     \begin{itemize}
+    %         \item[--] We fixed a $\mathcal{L} := [-N..N] \times [-N..N]$ and a sequence of 200 equally spaced $p$ values within the interval $(0, 1)$. 
+    %         \item[--] For each $p$, we ran 30 simulations.
+    %         \item[--] For each realization, we computed $v_N(0)$ recursively.  
+    %     \end{itemize}
+
+    %     \input{./additional-texs/representacion-k14}
+    % \end{frame}
+
+    \begin{frame}{Findings}
+    \vspace{-1.0cm}
+        \begin{figure}[!hbt]
+          \centering       
+          \includegraphics[width = 0.55\textwidth]{./images/game2/pN500MAXITER30.png}
+        \end{figure} 
+
+        Red and green points are estimates of
+        \begin{eqnarray*}
+            r_x  & = & \inf\{p \in [0, 1] \colon \Pbb_p(v_p =  x) = 1\}, \\
+            r_x' & = & \inf\{p \in [0, 1] \colon \Pbb_p(v_p > x) = 1\},
+        \end{eqnarray*}
+        for $x \in \{0, 0.25, 0.5, 0.75, 1\}$.
+    \end{frame}
+
+  % \begin{frame}   
+  %   \vspace{0.3cm}
+  %   \input{./additional-texs/game2-player1-structure} 
+
+  %   \vspace{0.7cm}
+  %   \input{./additional-texs/game2-player1-structure-remark} 
+  % \end{frame}
+
+    \begin{frame}
+        We further conjecture that, 
+        \begin{eqnarray*}
+              r_1 & = & q_1 \\
+              r_{0.25} & = & \inf\{p \in [0, 1] \colon \Pbb_p(\textcolor{red}{H_{11}}) = 1\} \\
+              r_{0.5}  & = & \inf\{p \in [0, 1] \colon \Pbb_p(\textcolor{red}{H_{21}}) = 1\} \\
+              r_{0.75} & = & \inf\{p \in [0, 1] \colon \Pbb_p(\textcolor{red}{H_{31}}) = 1\}
+        \end{eqnarray*}
+        
+        \textcolor{red}{$H_{k1}$}: ``there exists a winning structure for player 1 with all the squares having $k$ $1$s''.
+        \vspace{0.2cm}
+
+        % For example, in a $21$-structure all the squares are of the form: 
+        % \begin{center}
+        %     \begin{tikzpicture}[baseline, yshift=-0.7ex] 
+        %         % \node at (0,0) [square, draw, scale=1.8pt] (square) {};
+        %         \draw[dashed, thin, color = blue] (0.5, 0.5) -- (1, 0.5);
+        %         \draw[thin, color = blue] (1, 0.5) -- (1, 0);
+        %         \draw[dashed, thin, color = blue] (1, 0) -- (0.5, 0);
+        %         \draw[thin, color = blue] (0.5, 0) -- (0.5, 0.5);
+        %     \end{tikzpicture}
+        %     \; or \;
+        %     \begin{tikzpicture}[baseline, yshift=-0.7ex] 
+        %         % \node at (0,0) [square, draw, scale=1.8pt] (square) {};
+        %         \draw[thin, color = blue] (0.5, 0.5) -- (1, 0.5);
+        %         \draw[dashed, thin, color = blue] (1, 0.5) -- (1, 0);
+        %         \draw[thin, color = blue] (1, 0) -- (0.5, 0);
+        %         \draw[dashed, thin, color = blue] (0.5, 0) -- (0.5, 0.5);
+        %     \end{tikzpicture} 
+        % \end{center}
+
+        \vspace{0.5cm}
+        \visible<2->{\textcolor{blendedblue}{Goal}: Estimate the r.h.s.}
+    \end{frame}
+
+    \begin{frame}
+        \textcolor{blendedblue}{Estimating $\inf\{p \in [0, 1] \colon \Pbb_p(H_{k1}) = 1\}$}
+
+        \vspace{0.4cm}
+        We focus on: 
+        \begin{itemize}
+          \item[--] the events $H_{k1}^*$ for computational simplicity and relevance.
+          \item[--] the percolation model on $\Z^2$ to identify $k$-squares clusters* that spans $\mathcal{L}$ from the left side to the right side.
+        \end{itemize}
+        \vspace{0.2cm}
+
+        We employ:
+        \begin{itemize}
+            \item[--] a modified version of the Newman-Ziff algorithm to handle paths formed by \(k\)-squares:
+            \begin{itemize}
+                \item Bonds are opened sequentially on an initially closed lattice.
+                \item Each time, we check for the creation and connection of $k$-square clusters using a union-find method and dfs.
+                \item If the ``condition *'' is met, we record the onset of percolation.
+            \end{itemize}
+            \item[--] 30 simulations to average the mean onset of percolation.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \vspace{0.5cm}
+        \input{./additional-texs/structures-juntas} 
+    \end{frame}
+
+    \begin{frame}
+        \textcolor{blendedblue}{Estimating $\inf\{p \in [0, 1] \colon \Pbb_p(H_{k1}) = 1\}$}
+        \begin{figure}[!hbt]
+          \centering
+          \begin{minipage}{.35\linewidth}
+            \centering
+              \includegraphics[width = \textwidth]{./images/game2/0001_L_vs_p_MAX_L50-5100.png}
+            \caption{$k = 1$.}
+            \label{}
+          \end{minipage}
+          \begin{minipage}{.35\linewidth}
+            \centering
+              \includegraphics[width = \textwidth]{./images/game2/0011_L_vs_p_MAX_L50-5100.png}
+            \caption{$k = 2$.}
+            \label{}
+          \end{minipage}      
+          \begin{minipage}{.35\linewidth}
+            \centering
+              \includegraphics[width = \textwidth]{./images/game2/0111_L_vs_p_MAX_L50-5100.png}
+            \caption{$k = 3$.}
+            \label{}
+          \end{minipage}      
+          \begin{minipage}{.35\linewidth}
+            \centering
+              \includegraphics[width = \textwidth]{./images/game2/1111_L_vs_p_MAX_L50-5100.png}
+            \caption{$k = 4$.}
+            \label{}{}
+          \end{minipage}                     
+        \end{figure} 
+    \end{frame}
+
+    \begin{frame}{Resuming our results for this game:}
+        For $H_{k1}$: ``there exists a ws for player 1 conformed by $k$-squares''.
+        \vspace{0.3cm}
+
+        \textcolor{blendedblue}{Theorems:}\\
+        \vspace{0.1cm}
+         -- $v_p(z)$ is independent of $z$ and  is almost surely deterministic.\\ 
+         -- There exist $0 < q_0 < q_1 < 1$ such that
+            \vspace{-0.2cm}
+            \[
+                v_p  =  \begin{cases}
+                            0 & \text{if } p < q_0, \\
+                            1 & \text{if } p > q_1,
+                        \end{cases}
+            \]
+            where $q_1 = \inf\{p \, \colon \Pbb_p(H_{41}) = 1\} = 1-q_0$. 
+        \vspace{0.3cm}
+
+        \textcolor{blendedblue}{Conjectures:}\\
+        \vspace{0.1cm}
+          -- $v_p = 1$ if and only if $p \geq q_1$ ($v_p = 0$ if and only if $p \leq q_0$).\\
+          -- For $k \in {1, 2, 3, 4}$: 
+            \vspace{-0.2cm}
+            $$\inf\{p \, \colon \Pbb_p(v_p =  k/4) = 1\} = \inf\{p \, \colon \Pbb_p(H_{k1}) = 1\}.$$
+    \end{frame}
+
+    \input{./additional-texs/percolation-games-model}
+
+    \begin{frame}
+         \begin{center}
+            \Large Merci beaucoup !
+         \end{center}
+    \end{frame}
+
+\end{document}
