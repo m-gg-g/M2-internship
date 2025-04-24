@@ -33,6 +33,10 @@ This folder contains the code to test some conjectures related to percolation:
 
 For further details on the computational methods used, please refer to subsection 3.3 of the report.
 
+# additional comments
+
+It should be taken carefully as it was only written and developed during a research internship.
+
 
 
 
