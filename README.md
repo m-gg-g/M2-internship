@@ -8,7 +8,7 @@ Second, we extend the percolation games model by incorporating a stochastic proc
 
 # codes
 
-This folder contains the code for simulating two different games introduced in Section 3 of the report and testing conjectures based on a (special) percolation model on the square lattice. 
+This folder contains the code, written in `Python`, for simulating two different games introduced in Section 3 of the report and testing conjectures based on a (special) percolation model on the square lattice. 
 
 ## Folder Structure
 
