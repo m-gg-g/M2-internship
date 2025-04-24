@@ -8,13 +8,13 @@ Second, we extend the percolation games model by incorporating a stochastic proc
 
 # codes
 
-This folder contains the code for simulating two different games introduced in Section 3 od the report and testing conjectures based on the (special) percolation model on a square lattice \( Z^2 \). 
+This folder contains the code for simulating two different games introduced in Section 3 of the report and testing conjectures based on a (special) percolation model on the square lattice. 
 
 ## Folder Structure
 
 - **codes/Game_1**: Contains the simulations for the first game introduced in subsection 3.1 of the report.
 - **codes/Game_2**: Contains the simulations for the second game introduced in subsection 3.2 of the report.
-- **codes/Percolation_through_winning_structures**: Contains the code to test the conjectures related to percolation through structures conformed by squares and meeting the conditions specified on the page 30 of the report..
+- **codes/Percolation_through_winning_structures**: Contains the code to test the conjectures related to percolation through structures conformed by squares and meeting the conditions specified on the page 30 of the report.
 
 ### `codes/Game_1` and `codes/Game_2`
 These folders contain the following Python files:
