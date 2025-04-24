@@ -8,12 +8,31 @@ Second, we extend the percolation games model by incorporating a stochastic proc
 
 # codes
 
-The code is written in Python.
+This folder contains the code for simulating two different games introduced in Section 3 od the report and testing conjectures based on the (special) percolation model on a square lattice \( Z^2 \). 
 
-The folders codes/Game_1 and codes/Game_2 contain the simulations for the two games introduced in Section 3 of the report, respectively. In both folders, the file main_functions.py includes all the common functions used across the other .py files. The file draw_lattice_and_optimal_path.py contains functions for plotting a representation of the games, as well as the path resulting from an optimal strategy. In plot_value_as_a_function_of_p.py, we estimate the expected value of the $n$-stage value function as a function of $p$.
+## Folder Structure
 
-The folder codes/Percolation_through_winning_structures contains the code used to test some conjectures. Here, we focus on the percolation model on the square lattice $\mathbb{Z}^2$ and utilize a modified version of the Newman-Ziff algorithm to identify a connected graph of squares that meets the conditions specified on page 30 of the report (see $km$-horizontal structures). In functions_newmann_ziff_squares.py, all the necessary functions to run snz_xyzw_avec_height.py are provided, where xyzw indicates how many open edges are present in each square.
+- **codes/Game_1**: Contains the simulations for the first game introduced in subsection 3.1 of the report.
+- **codes/Game_2**: Contains the simulations for the second game introduced in subsection 3.2 of the report.
+- **codes/Percolation_through_winning_structures**: Contains the code to test the conjectures related to percolation through structures conformed by squares and meeting the conditions specified on the page 30 of the report..
+
+### `codes/Game_1` and `codes/Game_2`
+These folders contain the following Python files:
+
+- `main_functions.py`: This file includes all the common functions used across the other `.py` files in the respective game folder.
+- `draw_lattice_and_optimal_path.py`: This file contains functions to plot a representation of the game and the path resulting from the optimal strategy.
+- `plot_value_as_a_function_of_p.py`: In this file, we estimate the expected value of the n-stage value function as a function of the probability \( p \).
+
+### `codes/Percolation_through_winning_structures`
+This folder contains the code to test some conjectures related to percolation:
+
+- `functions_newmann_ziff_squares.py`: This file provides all the necessary functions to run the modified Newman-Ziff algorithm for percolation.
+- `snz_xyzw_avec_height.py`: This script runs the percolation process based on the conditions specified in the report, where `xyzw` indicates how many open edges are present in each square.
+
+## Computational Methods
 
 For further details on the computational methods used, please refer to subsection 3.3 of the report.
+
+
 
 
