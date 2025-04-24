@@ -1,0 +1,40 @@
+\documentclass[12pt]{article} 
+
+\input{preamble}
+
+\title{\Large Percolation games: percolation structures in two non-oriented examples on $\Z^2$ and random transitions in oriented games}
+\author{Melissa González García under the supervision of Bruno Ziliotto}
+\date{}
+
+% \newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\begin{document}
+	\maketitle
+	\vspace{-1.5cm}
+	\begin{center}
+		Internship report, Research Master 2 MATH, Applied and Theoretical Mathematics\\
+	 	Université Paris Dauphine PSL, CEREMADE, August 2024
+ 	\end{center}
+ 	
+
+	\vspace{1.0cm}
+	\begin{abstract}
+		Percolation games are a class of zero-sum stochastic games in which a token moves across $\Z^d$ based on a transition function jointly controlled by both players, with random, spatially distributed payoffs. When the payoffs are i.i.d. in space and the game is oriented --meaning the token tends to move in a fixed direction regardless of the players' actions-- the value of the $n$-stage game has been shown to converge to a limit as $n$ tends to infinity. It remains unresolved whether this convergence occurs without the orientation assumption. This research explores this question by first analyzing two examples on $\Z^2$, whose limit values turn out to be directly related to percolation through specific lattice structures that provide strategic advantages to the players. We geometrically characterize these structures, analyze the critical probabilities of their occurrence, and explore their strategic implications. Computational simulations offer additional insights. Secondly, we extend the percolation games model by incorporating a stochastic process into the first component of the state transitions. This modification allows the token in an oriented game to return to previously visited states. For an i.i.d. and oriented game, if the stochastic process has a mean of zero, the resulting game preserves orientation in expectation. Moreover, if it also has bounded support, we prove that the game possesses a limit value, with its expected value converging at the same rate as that of the base game, thus extending the original result.
+	\end{abstract}
+	\thispagestyle{empty}
+
+	\newpage
+	\tableofcontents
+
+	% sections
+	\input{./sections/introduction}	
+	\input{./sections/section2}	
+	\input{./sections/section3}
+	\input{./sections/section4}	
+	\input{./sections/section5}
+
+	% references
+	\newpage
+	\bibliography{references}
+	\bibliographystyle{ieeetr}
+\end{document}

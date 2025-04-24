@@ -1,0 +1,129 @@
+\section{Percolation Games}
+	The Percolation Games model was introduced by Garnier and Ziliotto in \cite{GarnierZiliotto2022}. In their paper, they define i.i.d. and oriented percolation games, and for them show that as $n$ tends to infinity, the sequence of values of the $n$-stage game converges almost surely to a constant, and determine the rate of convergence of it expected value. They also prove that the assumption of i.i.d. is necessary for this result.
+
+	The primary reference for this game model is their article, upon which we rely for writing this section. First, we describe the model and provide a brief overview of related models. Second, we present the main results regarding the existence of the limit value, as stated in their article.
+
+	\subsection{Model}
+	A percolation game is a zero-sum stochastic game with state space $\Z^d$, for $d \geq 1$ and is described by a tuple $\Gamma = (I, J, \mathcal{E}, g, q)$, where 
+	\begin{itemize}
+		\item[-] $I$ and $J$ are finite sets representing respectively player 1’s and player 2’s action sets.
+		\item[-] $\mathcal{E} = (\Omega, \F, \Pbb)$ is a probability space equipped with a collection of measurable transformations $\{\tau_z\}_{z \in \mathbb{Z}^d}$ that map $\Omega$ to itself, which are measure-preserving and form a group under composition, i.e.
+		\[
+			\Pbb(\tau_z(F)) = \Pbb(F) \; \text{ and } \; \tau_{z+z'} = \tau_z \circ \tau_{z'}, \text{ for all } z, z' \in \Z^d \text{ and } F \in \F.
+		\]
+		Moreover, the transformations ${\tau_z}$ are assumed to be ergodic: any event $F \in \F$ that is invariant (i.e., $\tau_z(F) = F$ for all $z \in \mathbb{Z}^d$) must have probability 0 or 1. 
+
+		\item[-] $g := \{\omega \mapsto g_{\omega}(z,i,j)\}, (z,i,j) \in \Z^d \times I \times J$ is a collection of real-valued random variables defined on $\Omega$, uniformly bounded and stationary, i.e. 
+		\[
+			g_{\tau_z(\omega)}(z', i, j) = g_{\omega}(z + z', i, j), \text{ for all } (z, z', i, j).
+		\]
+		\item[-] $q \colon I \times J \to \Z^d$ is a function that determines the transition between states. It is referred to as the transition function of the game.
+	\end{itemize}
+
+	The transformations $\tau_z$ are just translations of the lattice by $z \in \Z^d$.
+	
+	Given some initial state $z \in \Z^d$ and $\omega \in \Omega$, the game proceeds as follows:
+	\begin{itemize}
+		\item[--] Players are informed of $\omega$.
+		\item[--] At every stage $m \in \N_+$, both players are informed of the current state $z_{m}$. Player 1 chooses an action $i_m$ and then, knowing player 1's action, player 2 chooses an action $j_m$. The payoff at stage $m$ is $g_m^{\omega} := g_{\omega}(z_{m}, i_m, j_m)$, which represent the payoff of player 1, with player 2 receiving the opposite payoff. The new state $z_{m + 1}$ is then chosen according to $q(i_m, j_m)$ by  
+		\[
+			z_{m+1} := z_m + q(i_m, j_m).
+		\]
+		Then, the triplet $(i_m, j_m, z_{m+1})$ is publicly announced to the players.
+	\end{itemize}
+
+	\begin{remark}
+		We could define $g$ as $\{\omega \mapsto (g_{\omega}(z,i,j))_{(i, j) \in I \times J}\}_{z \in \Z^d}$: for each $z$, there is a matrix of random variables indexed by $(i, j)$. However, this definition imposes some structure on the original one. It might be useful when the cost on the edges is deterministic or when, for example, the payoffs are associated with the vertices rather than the edges.
+	\end{remark}
+
+	At every stage $m \in \N_+$, the information available to player 1 before playing is a vector of the form $(z, i_1, j_1, \ldots, z_{m-1}, i_{m-1}, j_{m-1}, z_m)$, and this is referred to as the history up to stage $m$. A strategy for player 1 is a sequence of mappings $\sigma = (\sigma_m)_{m\geq 1}$, such that $\sigma_m(h_{m}) \in I$ for every possible history $h_{m} \in (\Z^{d}\times I \times J)^{m-1} \times \Z^d$. Similarly, a strategy for player 2 is a sequence of mappings $\tau = (\tau_m)_{m \geq 1}$, where $\tau_m(h_m, i_m) \in J$ for all $(h_m, i_m) \in (\Z^{d}\times I \times J)^{m-1} \times \Z^d \times I$. The interpretation is that, given the history $h_m$, the strategy $\sigma_m$ tells player 1 to play $i_m$. Knowing $h_m$ and $i_m$, the strategy $\tau_m$ then tells player 2 to play $j_m$.
+
+	\begin{remark}
+		This is primarily a point of clarification. Once $\omega$ is fixed, which can be interpreted as nature having randomly selected one of the games according to $\Pbb$, the two players observe the entire realization of the game before play begins. From this point onward, there is no further randomness in the game: the players see the realization and can adjust their strategies accordingly.
+	\end{remark}
+
+	The set of strategies for player 1 and 2 are denoted by $\Sigma$ and $T$, respectively. Given an  initial state $z_1 \in \Z^d$ and a pair of strategies $(\sigma, \tau)$, they induce a play, which is a sequence $(z_m, i_m, j_m)_{m\geq1}$.
+
+	The $n$-stage game, denoted by $\Gamma_n^{\omega}(z)$, is the zero-sum game with strategy sets $\Sigma$ and $T$, and payoff function $\gamma_n^{\omega} \colon \Z^d \times \Sigma \times T \to \R$ defined by
+	\[
+		\gamma_n^{\omega}(z, \sigma, \tau) := \frac{1}{n}\sum_{m=1}^ng_m^{\omega}.
+	\]
+	The value of $\Gamma_n^{\omega}(z)$ exists (by Theorem I.2.4 in \cite{Mertens2015}; see, for example, Chapter IV of the same book) and is the real number $v_n^{\omega}(z)$ such that
+	\[
+		v_n^{\omega}(z) := \max_{\sigma \in \Sigma}\min_{\tau \in T} \gamma_n^{\omega}(z, \sigma, \tau) = \min_{\tau \in T}\max_{\sigma \in \Sigma} \gamma_n^{\omega}(z, \sigma, \tau).
+	\]
+
+	In the sequel, $v_n(z) \colon \mathcal{E} \to \R$ denote the random variable $\omega \mapsto v_n^{\omega}(z)$, where $\R$ is equipped with the Borel $\sigma$-algebra.
+	
+	Percolation games can be situated within the framework of random games, where the payoffs or structure are determined by a probability distribution rather than being fixed or deterministic. Generally speaking, such models consider a specific space of games (e.g., in normal-form, extensive-form, or repeated games), a natural probability measure over this space, and study the properties of games randomly selected according to this measure (see, e.g., Amiet et al. \cite{Amiet2021} and Flesch et al. \cite{Flesch2023} for recent results).
+
+	A percolation game is, in fact, a random turn-based stochastic game: initially, $\omega$ is drawn from $\Pbb$, and then players play a turn-based stochastic game determined by $\omega$, where ``turn-based'' means that players take turns selecting their actions.
+
+	\begin{remark}
+		In the seminal model of stochastic games introduced by Shapley \cite{Shapley1953}, players simultaneously choose their actions. Turn-based stochastic games can be viewed as a particular case of (simultaneous) stochastic games. This can be achieved by introducing ``dummy'' actions (e.g., ``wait'' or ``pass'') for each player, defining their strategies such that they alternate between the dummy actions and the original action sets, and redefining the transition and payoff functions to operate every two stages.
+	\end{remark}
+
+	Recently, Holroyd et al. \cite{Holroyd18} and Bashin et al. \cite{Bashin23} studied a class of games on the square lattice $\mathbb{Z}^2$, also referred to as percolation games by their authors. In their percolation games, two opposing players take turns moving a token along the vertices of $\mathbb{Z}^2$ based on some allowed moves, typically a finite subset of directed edges. Each vertex  is randomly and independently assigned one of three states: trap, target, or open, with probabilities $p$, $q$, and $1-p-q$, respectively. A player who moves the token to a trap loses the game immediately, while moving the token to a target results in an immediate win. The authors are interested in the probability of a draw (i.e. neither player can force a win) for fixed $p$ and $q$. There are several contrasts between these two notions of percolation games. For instance, the methods for aggregating the payoff differ, resulting in distinct payoff functions. Additionally, in the stage games presented in \cite{Bashin23}, exactly one player makes a move in each round, whereas in \cite{GarnierZiliotto2022}, each round consists of a move by player 1 followed immediately by a move by player 2. Furthermore, the problems they address differ: the former focuses on the probability of a draw, while the latter is concerned with the limit value of the game.
+
+	Percolation games have also been defined in environments other than $\Z^d$. For instance, very recently, in \cite{Attia2024} were introduced a type of percolation game called \emph{directed games}, where the state space is an acyclic directed graph over $\Z^d$. 
+
+	% The paper provides a formal game-theoretic formulation of the problem and suggest how the payoff function of the corresponding $n$-stage zero-sum game could be defined, facilitating the discussion on the connection with the model of this section. In terms of payoff, this game can be analyze as: if a player moves a token into a target (respectively, a trap), she receives a payoff of +1 (respectively, –1), and if no traps or targets are ever visited, both players receive payoff 0. 
+
+	\subsection{Known results}
+	Before stating the main results of Garnier and Ziliotto, we need to introduce two key definitions for percolation games.
+
+	\begin{definition}
+		A percolation game $\Gamma = (I, J, \mathcal{E}, g, q)$ is oriented if there exists $u \in \Z^d$ such that, for all $(i, j) \in I \times J$, $q(i, j) \cdot u > 0$.
+	\end{definition}
+
+	An oriented game can be intuitively described as a type of game where, regardless of the players' actions, the coordinates of the state with respect to $u$ always increase. The rate of this increase may vary depending on the players' actions.
+
+	\begin{definition}
+		A percolation game $\Gamma = (I, J, \mathcal{E}, g, q)$ is i.i.d. if the random variables $\{\omega \mapsto g_{\omega}(z, i, j)\}_{(z, i, j) \in \Z^d \times I \times J}$ are i.i.d.
+	\end{definition}
+	
+	%Note that when the game is i.i.d., it satisfies the assumed properties of stationarity and ergodicity outlined in the model.
+ 	
+ 	Next, we present their main result, establishing the existence of a limit value for percolation games that are i.i.d. and oriented.
+
+	\begin{theorem}\label{theorem_iid_and_oriented_percolation_games}
+		For a percolation game that is i.i.d. and oriented, and all $z \in \Z^d$, $v_n(z)$ converges $\Pbb$-almost surely to a constant $v_{\infty} \in \R$ as $n \to \infty$. Moreover, there exist real constants $A, B > 0$ such that for all $n \geq 1$, $z \in \Z^d$ and $\lambda \geq 0$,
+		\[
+			\Pbb\left(|v_n(z) - v_{\infty}| \geq \lambda + A\ln(n + 1)^{1/2}n^{-1/2} \right) \leq \exp(-B\lambda^2n)
+		\]
+		In particular, 
+		\[
+			|v_{\infty} - \E(v_n)| \leq A\ln(n + 1)^{1/2}n^{-1/2},
+		\]
+		which indicates that $\E(v_n)$ converges to $v_{\infty}$ at a rate of $O(ln(n)^{1/2}n^{-1/2})$.
+	\end{theorem}
+
+	The proof of this theorem can be found in the referenced article. It will be further clarified in the penultimate section, where we prove the same result for a slightly more general class of percolation games, using the same ideas to those employed in the proof of this theorem.
+
+	% First, it is demonstrated that $v_n(z)$ concentrates around its expectation $\E(v_n)$. This step includes defining the orthogonal hyperplane to the direction vector $u$, considering their translations, and an auxiliary game with a payoff of 0 on these hyperplanes. A crucial inequality arises when counting the number of times these hyperplanes are crossed during the game. Then, a martingale structure with bounded differences is established,  allowing the application of Azuma's concentration inequality. Next, it is shown that $\E(v_n)$ converges to $v$. This involves working with inequalities, playing the game in blocks, and studying the subadditivity of $(n\E(v_n))_{n\geq 1}$. The convergence rate is derived through induction, starting from the the result obtained from playing in blocks. Finally, using the previously established results, it is proven that $v_n$ concentrates around $v_{\infty}$ as $n$ tends to infinity.
+
+	\begin{remark} 
+		As a by-product of the proof of the existence of $v_{\infty}$, it follows that $v_{\infty}$ is deterministic and independent of the initial state. This means that the outcome of the $n$-stage game converges to a deterministic result that is inherent to the dynamics of the game, rather than being influenced by the starting state or the specific realization of the payoffs.
+	\end{remark}
+
+	Next, we state their second result, which illustrates that the existence of the limit value relies heavily on the i.i.d. assumption.
+
+	 \begin{theorem}
+	 	There exists an oriented percolation game in $\Z^3$ with payoffs in $\{0,1\}$ such that, for all $z \in \Z^3$, $\Pbb$-almost surely 
+	 	\[
+	 		\limsup_{n \to \infty}v_n(z) = 1 \; \text{ and } \; \liminf_{n \to \infty}v_n(z) = 0. 
+	 	\]
+	 \end{theorem}
+
+	The game they proposed to demonstrate this result is an oriented game along the $z$-axis direction, where the increment (-1, 0, or 1) along the $x$ and $y$ axes are determined by the actions of players 1 and 2, respectively. The payoff function is constructed in two phases. In the first phase, random squares perpendicular to the $x$-axis, filled with 1s, are created and are referred to as ``1-squares''. In the second phase, random squares perpendicular to the $y$-axis, filled with 0s, are created and are referred to as ``0-squares''. The construction ensures that a 1-square will never be intersected by a larger 0-square. Moreover, the construction is designed so that, with probability 1, there exist sequences $(n_{k})$ and $(n'_{k})$ that go to infinity such that:
+	\begin{itemize} 
+		\item[--] For every $n_{k}$-stage game, regardless of player 2's strategy, player 1 can position the state on a 1-square, whose length tends to infinity as $n_{k}$. Player 1 can ensure that the state remains on this square indefinitely, leading to a subsequence of stages converging to the value 1. 
+		\item[--] Similarly, for every $n'_{k}$-stage game, regardless of player 1's strategy, player 2 can position the state on a 0-square, whose length tends to infinity as $n'_{k}$. Player 2 can ensure that the state remains on this square indefinitely, leading to a subsequence of stages converging to the value 0.
+	\end{itemize}
+	For a detailed and nice proof we refer to the cited article.
+
+	In the i.i.d. setting without orientation, the existence of the limit is not guaranteed. Even when it does exist, it may be random and dependent on the initial state. To illustrate this, consider a game where $q(i, j) = 0$ for all $(i, j) \in I \times J$, and where the payoffs follow an i.i.d. distribution across states (for instance, a Bernoulli). In this case, the limit depends on the specific realization of the payoff at the initial state.
+
+	% The question of whether the limit value exists in the absence of the orientation assumption presents a significant challenge. This complexity arises primarily because, without the orientation hypothesis, the value may strongly depend on the local properties of the environment. 
+
+	In the next section, we present and analyze two examples of non-oriented (and almost i.i.d.) percolation games, whose limit values are closely related to percolation-type problems. Additionally, in Section 4, we introduce a generalization of the model in which the token can return to previously visited states, while still being oriented in expectation and for which a result equivalent to Theorem \ref{theorem_iid_and_oriented_percolation_games} can be established.
