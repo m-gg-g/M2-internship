@@ -10,11 +10,7 @@ Second, we extend the percolation games model by incorporating a stochastic proc
 
 First, we simulated the 2 games introduced in Section 3 of the report to estimate the expected value of their $n$-stage value function as a function of $p$, with $n$ as large as our computers could handle. For it, we followed the approach: We fixed a finite two-dimensional lattice and a sequence of 200 equally spaced $p$ values within the interval $(0, 1)$. For each $p$, we ran 30 simulations with independent and identically distributed realizations of the costs on the edges. For each fixed realization, we computed the value of the largest finite stage game starting at the center of the finite lattice and constrained within its boundaries, using a recursive method.
 
-Second, to test some conjectures, we focus on the percolation model on the square lattice $\mathbb{Z}^2$ and aim to identify a connected graph of squares that meets the conditions of Definition 3.21. and spans the lattice from the left side to the right side. We utilized a modified version of the Newman-Ziff algorithm, as proposed by Newman and Ziff \cite{NewmanZiff2001}, which allows us to measure observable quantities (e.g., average cluster size, largest cluster size, or cluster spanning) in a percolation system across all values of site or bond open probability, from zero to one.
+Second, to test some conjectures, we focus on the percolation model on the square lattice $\mathbb{Z}^2$ and aim to identify a connected graph of squares that meets the conditions of Definition 3.21. and spans the lattice from the left side to the right side. We utilized a modified version of the Newman-Ziff algorithm, which allows us to measure observable quantities (e.g., average cluster size, largest cluster size, or cluster spanning) in a percolation system across all values of site or bond open probability, from zero to one.
 
 For further details on the computational methods used, please refer to subsection 3.3.
-
-## References
-
-Newman, M. E. J., & Ziff, R. M. (2001). Efficient Monte Carlo algorithm and high-precision results for percolation. *Physical Review Letters*, 85(19), 4104-4107. https://doi.org/10.1103/PhysRevLett.85.4104
 
