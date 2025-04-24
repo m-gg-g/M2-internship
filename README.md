@@ -8,7 +8,7 @@ Second, we extend the percolation games model by incorporating a stochastic proc
 
 # codes
 
-This folder contains the code, written in `Python`, for simulating two different games introduced in Section 3 of the report and testing conjectures based on a (special) percolation model on the square lattice. 
+This folder contains the code, written in `Python`, for simulating two different games introduced in Section 3 of the report and testing conjectures related to them, based on a (special) percolation model on the square lattice. 
 
 ## Folder Structure
 
@@ -21,7 +21,7 @@ These folders contain the following Python files:
 
 - `main_functions.py`: This file includes all the common functions used across the other `.py` files in the respective game folder.
 - `draw_lattice_and_optimal_path.py`: This file contains functions to plot a representation of the game and the path resulting from the optimal strategy.
-- `plot_value_as_a_function_of_p.py`: In this file, we estimate the expected value of the n-stage value function as a function of the probability \( p \).
+- `plot_value_as_a_function_of_p.py`: In this file, we estimate the expected value of the finite-stage value functions as a function of the Bernoulli parameter
 
 ### `codes/Percolation_through_winning_structures`
 This folder contains the code to test some conjectures related to percolation:
