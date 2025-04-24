@@ -10,7 +10,7 @@ Second, we extend the percolation games model by incorporating a stochastic proc
 
 This folder contains the code, written in `Python`, for simulating two different games introduced in Section 3 of the report and testing conjectures related to them, based on a (special) percolation model on the square lattice. 
 
-## Folder Structure
+## folder structure
 
 - **codes/Game_1**: Contains the simulations for the first game introduced in subsection 3.1 of the report.
 - **codes/Game_2**: Contains the simulations for the second game introduced in subsection 3.2 of the report.
@@ -29,7 +29,7 @@ This folder contains the code to test some conjectures related to percolation:
 - `functions_newmann_ziff_squares.py`: This file provides all the necessary functions to run the modified Newman-Ziff algorithm for percolation.
 - `snz_xyzw_avec_height.py`: This script runs the percolation process based on the conditions specified in the report, where `xyzw` indicates how many open edges are present in each square.
 
-## Computational Methods
+## computational methods
 
 For further details on the computational methods used, please refer to subsection 3.3 of the report.
 
